@@ -2,7 +2,7 @@ FROM python:3.8
 
 WORKDIR /app
 
-COPY /Seaborn .
+COPY ./
 
 RUN pip install seaborn matplotlib
 

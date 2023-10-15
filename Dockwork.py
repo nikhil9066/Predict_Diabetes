@@ -17,7 +17,7 @@ plt.title("Pairplot of Iris Dataset")
 plt.show()
 
 # Create a violin plot to visualize the distribution of sepal lengths by species
-sns.violinplot(x="species", y="sepal_length", data=iris, palette=palette)
+sns.violinplot(x="species", y="sepal_length", data=iris, inner="quart", palette=palette, hue="species", legend=False)
 plt.title("Distribution of Sepal Length by Species")
 plt.show()
 
