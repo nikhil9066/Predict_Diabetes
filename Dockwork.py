@@ -1,31 +1,14 @@
-import seaborn as sns
-import matplotlib.pyplot as plt
+from flask import Flask
 
-import warnings
-warnings.filterwarnings("ignore")
+# Create a Flask web server
+app = Flask(__name__)
 
-# Load the Iris dataset from Seaborn
-iris = sns.load_dataset("iris")
+# Define a route for the root URL ("/")
+@app.route('/')
+def hello():
+    # Return "Hello, World!" as the response
+    return 'Hello, World!'
 
-# Encode the 'species' column to numeric values
-species_mapping = {'setosa': 0, 'versicolor': 1, 'virginica': 2}
-iris['species_id'] = iris['species'].map(species_mapping)
-
-# Set a custom color palette for the species
-palette = ['b', 'g', 'r']
-
-# Create a pairplot to visualize relationships between features
-sns.pairplot(iris, hue="species_id", palette=palette)
-plt.title("Pairplot of Iris Dataset")
-plt.show()
-
-# Create a violin plot to visualize the distribution of sepal lengths by species
-sns.violinplot(x="species", y="sepal_length", data=iris, inner="quart", palette=palette, hue="species", legend=False)
-plt.title("Distribution of Sepal Length by Species")
-plt.show()
-
-# Create a correlation heatmap
-correlation_matrix = iris.drop('species', axis=1).corr()
-sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm")
-plt.title("Correlation Heatmap")
-plt.show()
+# Run the Flask app if this script is executed
+if __name__ == '__main__':
+    app.run(debug=True)
