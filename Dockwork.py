@@ -1,6 +1,9 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+import warnings
+warnings.filterwarnings("ignore")
+
 # Load the Iris dataset from Seaborn
 iris = sns.load_dataset("iris")
 
