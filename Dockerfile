@@ -1,9 +1,9 @@
-FROM python:3.8
+FROM python:3.12
 
 WORKDIR /app
 
 COPY . /app
 
-RUN pip install seaborn matplotlib
+RUN pip install -r requirements.txt
 
-CMD ["python", "Dockwork.py"]
+CMD python3 Dockwork.py 
