@@ -15,8 +15,11 @@ This is a basic Flask application containerized using Docker.
 
 ### Building the Docker Image
 
+Inorder to start the flask application pull the docker image from the hub
+```shell
+docker pull nikhilprao/flaskapp:v2
+```
 To build the Docker image for this Flask application, navigate to the project directory and run the following command:
-
 ```shell
 docker build -t nikhilprao/flaskapp:v2 .
 ```
