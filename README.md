@@ -34,7 +34,7 @@ docker run -p 8000:8000 nikhilprao/flaskapp:v2
 ```
 The Flask application will be accessible at
 ```
-http://localhost:8000.
+http://localhost:8000
 ```
 ## Repository
 The Docker image is hosted on Docker Hub at nikhilprao/flaskapp:v2.
