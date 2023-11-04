@@ -1,0 +1,119 @@
+Last login: Wed Nov  1 17:33:44 on ttys002
+nikhilprao@Nikhils-MacBook-Air ~ % ls
+Applications		Movies			kubectl
+Desktop			Music			kubectl.sha256
+Documents		Pictures		minikube-darwin-arm64
+Downloads		Public
+Library			git.py
+nikhilprao@Nikhils-MacBook-Air ~ % python3 git.py 
+Enter the commit message: implementing kube into the flask app
+Already up to date.
+
+Switched to a new branch 'init'
+
+* init
+  main
+
+
+[init e72caa9] implementing kube into the flask app
+ 2 files changed, 31 insertions(+)
+ create mode 100644 flask-app-deployment.yaml
+ create mode 100644 flask-app-service.yaml
+
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 809 bytes | 809.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'init' on GitHub by visiting:
+remote:      https://github.com/nikhil9066/flaskwork/pull/new/init
+remote: 
+To github.com:nikhil9066/flaskwork.git
+ * [new branch]      init -> init
+branch 'init' set up to track 'origin/init'.
+
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+warning: deleting branch 'init' that has been merged to
+         'refs/remotes/origin/init', but not yet merged to HEAD.
+Deleted branch init (was e72caa9).
+
+* main
+
+Everything up-to-date
+
+Once your done merging the files in Git -> Hit Enter 
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), 646 bytes | 323.00 KiB/s, done.
+From github.com:nikhil9066/flaskwork
+   ae8b136..6442ddd  main       -> origin/main
+Updating ae8b136..6442ddd
+Fast-forward
+ flask-app-deployment.yaml | 19 +++++++++++++++++++
+ flask-app-service.yaml    | 12 ++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 flask-app-deployment.yaml
+ create mode 100644 flask-app-service.yaml
+
+Already up to date.
+
+nikhilprao@Nikhils-MacBook-Air ~ % python3 git.py
+Enter the commit message: updating the readme file
+Already up to date.
+
+Switched to a new branch 'init'
+
+* init
+  main
+
+
+[init 05f33b9] updating the readme file
+ 1 file changed, 73 insertions(+), 5 deletions(-)
+
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 2.05 KiB | 2.05 MiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'init' on GitHub by visiting:
+remote:      https://github.com/nikhil9066/flaskwork/pull/new/init
+remote: 
+To github.com:nikhil9066/flaskwork.git
+ * [new branch]      init -> init
+branch 'init' set up to track 'origin/init'.
+
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+warning: deleting branch 'init' that has been merged to
+         'refs/remotes/origin/init', but not yet merged to HEAD.
+Deleted branch init (was 05f33b9).
+
+* main
+
+Everything up-to-date
+
+Once your done merging the files in Git -> Hit Enter 
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (5/5), 1.87 KiB | 383.00 KiB/s, done.
+From github.com:nikhil9066/flaskwork
+   6442ddd..44b525d  main       -> origin/main
+Updating 6442ddd..44b525d
+Fast-forward
+ README.md | 80 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 74 insertions(+), 6 deletions(-)
+
+Already up to date.
+
+nikhilprao@Nikhils-MacBook-Air ~ % 

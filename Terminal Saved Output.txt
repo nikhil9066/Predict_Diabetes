@@ -1,0 +1,129 @@
+nikhilprao@Nikhils-MacBook-Air ~ %    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl.sha256"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   138  100   138    0     0    613      0 --:--:-- --:--:-- --:--:--   630
+100    64  100    64    0     0    164      0 --:--:-- --:--:-- --:--:--   164
+nikhilprao@Nikhils-MacBook-Air ~ % echo "$(cat kubectl.sha256)  kubectl" | shasum -a 256 --check
+kubectl: OK
+nikhilprao@Nikhils-MacBook-Air ~ % pwd
+/Users/nikhilprao
+nikhilprao@Nikhils-MacBook-Air ~ % kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.2", GitCommit:"7f6f68fdabc4df88cfea2dcf9a19b2b830f1e647", GitTreeState:"clean", BuildDate:"2023-05-17T14:20:07Z", GoVersion:"go1.20.4", Compiler:"gc", Platform:"darwin/arm64"}
+Kustomize Version: v5.0.1
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+nikhilprao@Nikhils-MacBook-Air ~ % kubectl --version
+error: unknown flag: --version
+See 'kubectl --help' for usage.
+nikhilprao@Nikhils-MacBook-Air ~ % kubectl version  
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.2", GitCommit:"7f6f68fdabc4df88cfea2dcf9a19b2b830f1e647", GitTreeState:"clean", BuildDate:"2023-05-17T14:20:07Z", GoVersion:"go1.20.4", Compiler:"gc", Platform:"darwin/arm64"}
+Kustomize Version: v5.0.1
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+nikhilprao@Nikhils-MacBook-Air ~ % brew install hyperkit
+
+==> Homebrew collects anonymous analytics.
+Read the analytics documentation (and how to opt-out) here:
+  https://docs.brew.sh/Analytics
+No analytics have been recorded yet (nor will be during this `brew` run).
+
+==> Homebrew is run entirely by unpaid volunteers. Please consider donating:
+  https://github.com/Homebrew/brew#donations
+
+Running `brew update --auto-update`...
+==> Auto-updated Homebrew!
+Updated 2 taps (homebrew/core and homebrew/cask).
+==> New Formulae
+abi3audit          cf2tf              csprecon           eatmemory          gotpm              karmadactl         node@20            pciutils           scilla             sshportal          wormhole-william
+auditwheel         chainloop-cli      daktilo            favirecon          gptline            lager              nvimpager          perl-xml-parser    sigma-cli          three-body         xeol
+badkeys            changie            dcp                git-mediate        haiti              libdicom           opentofu           pmix               sigstore           uvicorn            zix
+bob                cloudsplaining     diffoci            gitsign            immer              libnghttp3         pan                rekor-cli          snyk-cli           vulsio-gost        zug
+cariddi            crunchy-cli        dockly             gossip             jprq               mentat             patch-package      saf-cli            ssh-mitm           whisper-cpp
+==> New Casks
+affine                        brickstore                    fossa                         kuaitie                       simplex                       spacedrive                    xsplit-vcam
+batchoutput-pdf               commandpost                   free-podcast-transcription    nvs                           songkong                      writerside
+
+hyperkit: A full installation of Xcode.app 9.0 is required to compile
+this software. Installing just the Command Line Tools is not sufficient.
+
+Xcode can be installed from the App Store.
+hyperkit: The x86_64 architecture is required for this software.
+Error: hyperkit: Unsatisfied requirements failed this build.
+nikhilprao@Nikhils-MacBook-Air ~ % brew update
+Already up-to-date.
+nikhilprao@Nikhils-MacBook-Air ~ % clear
+
+nikhilprao@Nikhils-MacBook-Air ~ % sudo brew install hyperkit
+Password:
+Error: Running Homebrew as root is extremely dangerous and no longer supported.
+As Homebrew does not drop privileges on installation you would be giving all
+build scripts full access to your system.
+nikhilprao@Nikhils-MacBook-Air ~ % brew install hyperkit
+
+
+hyperkit: A full installation of Xcode.app 9.0 is required to compile
+this software. Installing just the Command Line Tools is not sufficient.
+
+Xcode can be installed from the App Store.
+hyperkit: The x86_64 architecture is required for this software.
+Error: hyperkit: Unsatisfied requirements failed this build.
+nikhilprao@Nikhils-MacBook-Air ~ % brew install kubernetes-cli
+
+
+==> Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.28.3
+######################################################################################################################################################################################################### 100.0%
+==> Fetching kubernetes-cli
+==> Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:9229655d9ccb521f3c1986077a4826f2ba3049357623f39c72c53b4253fe08ad
+######################################################################################################################################################################################################### 100.0%
+==> Pouring kubernetes-cli--1.28.3.arm64_sonoma.bottle.tar.gz
+==> Caveats
+zsh completions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+==> Summary
+🍺  /opt/homebrew/Cellar/kubernetes-cli/1.28.3: 232 files, 58.9MB
+==> Running `brew cleanup kubernetes-cli`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+nikhilprao@Nikhils-MacBook-Air ~ % kubernetes-cli version
+zsh: command not found: kubernetes-cli
+nikhilprao@Nikhils-MacBook-Air ~ % kubernetes-cli --version
+zsh: command not found: kubernetes-cli
+nikhilprao@Nikhils-MacBook-Air ~ % minikube start
+zsh: command not found: minikube
+nikhilprao@Nikhils-MacBook-Air ~ % minikube version
+zsh: command not found: minikube
+nikhilprao@Nikhils-MacBook-Air ~ % minikube version
+zsh: command not found: minikube
+nikhilprao@Nikhils-MacBook-Air ~ % curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 80.3M  100 80.3M    0     0   771k      0  0:01:46  0:01:46 --:--:--  744k
+nikhilprao@Nikhils-MacBook-Air ~ % sudo install minikube-darwin-arm64 /usr/local/bin/minikube
+Password:
+nikhilprao@Nikhils-MacBook-Air ~ % sudo install minikube-darwin-arm64 /usr/local/bin/minikube
+nikhilprao@Nikhils-MacBook-Air ~ % minikube version                                                                      
+minikube version: v1.31.2
+commit: fd7ecd9c4599bef9f04c0986c4a0187f98a4396e
+nikhilprao@Nikhils-MacBook-Air ~ % minikube start
+\😄  minikube v1.31.2 on Darwin 14.1 (arm64)
+👎  Unable to pick a default driver. Here is what was considered, in preference order:
+    ▪ docker: Not healthy: "docker version --format {{.Server.Os}}-{{.Server.Version}}:{{.Server.Platform.Name}}" exit status 1: Cannot connect to the Docker daemon at unix:///Users/nikhilprao/.docker/run/docker.sock. Is the docker daemon running?
+    ▪ docker: Suggestion: Start the Docker service <https://minikube.sigs.k8s.io/docs/drivers/docker/>
+💡  Alternatively you could install one of these drivers:
+    ▪ hyperkit: Not installed: exec: "hyperkit": executable file not found in $PATH
+    ▪ parallels: Not installed: exec: "prlctl": executable file not found in $PATH
+    ▪ qemu2: Not installed: exec: "qemu-system-aarch64": executable file not found in $PATH
+    ▪ virtualbox: Not installed: unable to find VBoxManage in $PATH
+    ▪ podman: Not installed: exec: "podman": executable file not found in $PATH
+
+❌  Exiting due to DRV_DOCKER_NOT_RUNNING: Found docker, but the docker service isn't running. Try restarting the docker service.
+
+nikhilprao@Nikhils-MacBook-Air ~ % docker login
+Authenticating with existing credentials...
+Login Succeeded
+nikhilprao@Nikhils-MacBook-Air ~ % docker images
+REPOSITORY            TAG       IMAGE ID       CREATED        SIZE
+nikhilprao/flaskapp   v2        05c15bc7e295   23 hours ago   1.04GB
+nikhilprao@Nikhils-MacBook-Air ~ % pwd
+/Users/nikhilprao
+nikhilprao@Nikhils-MacBook-Air ~ % 

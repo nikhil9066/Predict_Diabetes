@@ -1,0 +1,429 @@
+flask-app-deployment-5f65686d4b-kp8j8   1/1     Running   0          38s
+flask-app-deployment-5f65686d4b-xpzqq   1/1     Running   0          38s
+^C%                                                                                                                     nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl get all    
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/flask-app-deployment-5f65686d4b-7nhd6   1/1     Running   0          60s
+pod/flask-app-deployment-5f65686d4b-kp8j8   1/1     Running   0          60s
+pod/flask-app-deployment-5f65686d4b-xpzqq   1/1     Running   0          60s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   6m35s
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/flask-app-deployment   3/3     3            3           60s
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       60s
+nikhilprao@Nikhils-MacBook-Air flaskwork % clear
+
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl get all
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/flask-app-deployment-5f65686d4b-7nhd6   1/1     Running   0          94s
+pod/flask-app-deployment-5f65686d4b-kp8j8   1/1     Running   0          94s
+pod/flask-app-deployment-5f65686d4b-xpzqq   1/1     Running   0          94s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m9s
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/flask-app-deployment   3/3     3            3           94s
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       94s
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl apply -f flask-app-service.yaml
+service/flask-app-service created
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl get pods -w                    
+NAME                                    READY   STATUS    RESTARTS   AGE
+flask-app-deployment-5f65686d4b-7nhd6   1/1     Running   0          4m20s
+flask-app-deployment-5f65686d4b-kp8j8   1/1     Running   0          4m20s
+flask-app-deployment-5f65686d4b-xpzqq   1/1     Running   0          4m20s
+^C%                                                                                                                                                                                  nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl get all                        
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/flask-app-deployment-5f65686d4b-7nhd6   1/1     Running   0          4m27s
+pod/flask-app-deployment-5f65686d4b-kp8j8   1/1     Running   0          4m27s
+pod/flask-app-deployment-5f65686d4b-xpzqq   1/1     Running   0          4m27s
+
+NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/flask-app-service   LoadBalancer   10.101.147.61   <pending>     80:32377/TCP   13s
+service/kubernetes          ClusterIP      10.96.0.1       <none>        443/TCP        10m
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/flask-app-deployment   3/3     3            3           4m27s
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m27s
+nikhilprao@Nikhils-MacBook-Air flaskwork % clear
+
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl get all
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/flask-app-deployment-5f65686d4b-7nhd6   1/1     Running   0          4m48s
+pod/flask-app-deployment-5f65686d4b-kp8j8   1/1     Running   0          4m48s
+pod/flask-app-deployment-5f65686d4b-xpzqq   1/1     Running   0          4m48s
+
+NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/flask-app-service   LoadBalancer   10.101.147.61   <pending>     80:32377/TCP   34s
+service/kubernetes          ClusterIP      10.96.0.1       <none>        443/TCP        10m
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/flask-app-deployment   3/3     3            3           4m48s
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m48s
+nikhilprao@Nikhils-MacBook-Air flaskwork % minikube service flask-app 
+
+❌  Exiting due to SVC_NOT_FOUND: Service 'flask-app' was not found in 'default' namespace.
+You may select another namespace by using 'minikube service flask-app -n <namespace>'. Or list out all the services using 'minikube service list'
+
+nikhilprao@Nikhils-MacBook-Air flaskwork % minikube service flask-app-deployment 
+
+❌  Exiting due to SVC_NOT_FOUND: Service 'flask-app-deployment' was not found in 'default' namespace.
+You may select another namespace by using 'minikube service flask-app-deployment -n <namespace>'. Or list out all the services using 'minikube service list'
+
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl get services                 
+NAME                TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+flask-app-service   LoadBalancer   10.101.147.61   <pending>     80:32377/TCP   4m34s
+kubernetes          ClusterIP      10.96.0.1       <none>        443/TCP        14m
+nikhilprao@Nikhils-MacBook-Air flaskwork % minikube service flask-app-service   
+|-----------|-------------------|-------------|---------------------------|
+| NAMESPACE |       NAME        | TARGET PORT |            URL            |
+|-----------|-------------------|-------------|---------------------------|
+| default   | flask-app-service |          80 | http://192.168.49.2:32377 |
+|-----------|-------------------|-------------|---------------------------|
+🏃  Starting tunnel for service flask-app-service.
+|-----------|-------------------|-------------|------------------------|
+| NAMESPACE |       NAME        | TARGET PORT |          URL           |
+|-----------|-------------------|-------------|------------------------|
+| default   | flask-app-service |             | http://127.0.0.1:49936 |
+|-----------|-------------------|-------------|------------------------|
+🎉  Opening service default/flask-app-service in default browser...
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+^C✋  Stopping tunnel for service flask-app-service.                               
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl describe pod
+Name:             flask-app-deployment-5f65686d4b-7nhd6
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 01 Nov 2023 17:08:59 -0400
+Labels:           app=flask-app
+                  pod-template-hash=5f65686d4b
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.5
+IPs:
+  IP:           10.244.0.5
+Controlled By:  ReplicaSet/flask-app-deployment-5f65686d4b
+Containers:
+  flask-app-container:
+    Container ID:   docker://a06cc213119849248f1e866f4ae8d711d7959fd60b03f4a65f4ca6cef3b47964
+    Image:          nikhilprao/flaskapp:v2
+    Image ID:       docker-pullable://nikhilprao/flaskapp@sha256:9b39a23528a79c3587b41573dcca5772bac57a15cd20be44742abd646a70986f
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Nov 2023 17:09:21 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-nsk42 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-nsk42:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  24m   default-scheduler  Successfully assigned default/flask-app-deployment-5f65686d4b-7nhd6 to minikube
+  Normal  Pulling    24m   kubelet            Pulling image "nikhilprao/flaskapp:v2"
+  Normal  Pulled     23m   kubelet            Successfully pulled image "nikhilprao/flaskapp:v2" in 1.561278543s (21.259234093s including waiting)
+  Normal  Created    23m   kubelet            Created container flask-app-container
+  Normal  Started    23m   kubelet            Started container flask-app-container
+
+
+Name:             flask-app-deployment-5f65686d4b-kp8j8
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 01 Nov 2023 17:08:59 -0400
+Labels:           app=flask-app
+                  pod-template-hash=5f65686d4b
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.4
+IPs:
+  IP:           10.244.0.4
+Controlled By:  ReplicaSet/flask-app-deployment-5f65686d4b
+Containers:
+  flask-app-container:
+    Container ID:   docker://04841734e7ef694705e1d9b81a91607454085f95e50168044b753d66fac00e24
+    Image:          nikhilprao/flaskapp:v2
+    Image ID:       docker-pullable://nikhilprao/flaskapp@sha256:9b39a23528a79c3587b41573dcca5772bac57a15cd20be44742abd646a70986f
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Nov 2023 17:09:20 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6r4f9 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-6r4f9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  24m   default-scheduler  Successfully assigned default/flask-app-deployment-5f65686d4b-kp8j8 to minikube
+  Normal  Pulling    24m   kubelet            Pulling image "nikhilprao/flaskapp:v2"
+  Normal  Pulled     23m   kubelet            Successfully pulled image "nikhilprao/flaskapp:v2" in 551.236959ms (19.698017342s including waiting)
+  Normal  Created    23m   kubelet            Created container flask-app-container
+  Normal  Started    23m   kubelet            Started container flask-app-container
+
+
+Name:             flask-app-deployment-5f65686d4b-xpzqq
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 01 Nov 2023 17:08:59 -0400
+Labels:           app=flask-app
+                  pod-template-hash=5f65686d4b
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.3
+IPs:
+  IP:           10.244.0.3
+Controlled By:  ReplicaSet/flask-app-deployment-5f65686d4b
+Containers:
+  flask-app-container:
+    Container ID:   docker://076ea15746cce79b70106535634e0cb7d0dc61a2680476d1a02ba200dfe8cac2
+    Image:          nikhilprao/flaskapp:v2
+    Image ID:       docker-pullable://nikhilprao/flaskapp@sha256:9b39a23528a79c3587b41573dcca5772bac57a15cd20be44742abd646a70986f
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Nov 2023 17:09:19 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fq2st (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-fq2st:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  24m   default-scheduler  Successfully assigned default/flask-app-deployment-5f65686d4b-xpzqq to minikube
+  Normal  Pulling    24m   kubelet            Pulling image "nikhilprao/flaskapp:v2"
+  Normal  Pulled     23m   kubelet            Successfully pulled image "nikhilprao/flaskapp:v2" in 19.413177593s (19.413310176s including waiting)
+  Normal  Created    23m   kubelet            Created container flask-app-container
+  Normal  Started    23m   kubelet            Started container flask-app-container
+nikhilprao@Nikhils-MacBook-Air flaskwork % kubectl describe pod               
+Name:             flask-app-deployment-5f65686d4b-7nhd6
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 01 Nov 2023 17:08:59 -0400
+Labels:           app=flask-app
+                  pod-template-hash=5f65686d4b
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.5
+IPs:
+  IP:           10.244.0.5
+Controlled By:  ReplicaSet/flask-app-deployment-5f65686d4b
+Containers:
+  flask-app-container:
+    Container ID:   docker://a06cc213119849248f1e866f4ae8d711d7959fd60b03f4a65f4ca6cef3b47964
+    Image:          nikhilprao/flaskapp:v2
+    Image ID:       docker-pullable://nikhilprao/flaskapp@sha256:9b39a23528a79c3587b41573dcca5772bac57a15cd20be44742abd646a70986f
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Nov 2023 17:09:21 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-nsk42 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-nsk42:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  50m   default-scheduler  Successfully assigned default/flask-app-deployment-5f65686d4b-7nhd6 to minikube
+  Normal  Pulling    50m   kubelet            Pulling image "nikhilprao/flaskapp:v2"
+  Normal  Pulled     49m   kubelet            Successfully pulled image "nikhilprao/flaskapp:v2" in 1.561278543s (21.259234093s including waiting)
+  Normal  Created    49m   kubelet            Created container flask-app-container
+  Normal  Started    49m   kubelet            Started container flask-app-container
+
+
+Name:             flask-app-deployment-5f65686d4b-kp8j8
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 01 Nov 2023 17:08:59 -0400
+Labels:           app=flask-app
+                  pod-template-hash=5f65686d4b
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.4
+IPs:
+  IP:           10.244.0.4
+Controlled By:  ReplicaSet/flask-app-deployment-5f65686d4b
+Containers:
+  flask-app-container:
+    Container ID:   docker://04841734e7ef694705e1d9b81a91607454085f95e50168044b753d66fac00e24
+    Image:          nikhilprao/flaskapp:v2
+    Image ID:       docker-pullable://nikhilprao/flaskapp@sha256:9b39a23528a79c3587b41573dcca5772bac57a15cd20be44742abd646a70986f
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Nov 2023 17:09:20 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6r4f9 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-6r4f9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  50m   default-scheduler  Successfully assigned default/flask-app-deployment-5f65686d4b-kp8j8 to minikube
+  Normal  Pulling    50m   kubelet            Pulling image "nikhilprao/flaskapp:v2"
+  Normal  Pulled     50m   kubelet            Successfully pulled image "nikhilprao/flaskapp:v2" in 551.236959ms (19.698017342s including waiting)
+  Normal  Created    50m   kubelet            Created container flask-app-container
+  Normal  Started    50m   kubelet            Started container flask-app-container
+
+
+Name:             flask-app-deployment-5f65686d4b-xpzqq
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 01 Nov 2023 17:08:59 -0400
+Labels:           app=flask-app
+                  pod-template-hash=5f65686d4b
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.3
+IPs:
+  IP:           10.244.0.3
+Controlled By:  ReplicaSet/flask-app-deployment-5f65686d4b
+Containers:
+  flask-app-container:
+    Container ID:   docker://076ea15746cce79b70106535634e0cb7d0dc61a2680476d1a02ba200dfe8cac2
+    Image:          nikhilprao/flaskapp:v2
+    Image ID:       docker-pullable://nikhilprao/flaskapp@sha256:9b39a23528a79c3587b41573dcca5772bac57a15cd20be44742abd646a70986f
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Nov 2023 17:09:19 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fq2st (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-fq2st:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  50m   default-scheduler  Successfully assigned default/flask-app-deployment-5f65686d4b-xpzqq to minikube
+  Normal  Pulling    50m   kubelet            Pulling image "nikhilprao/flaskapp:v2"
+  Normal  Pulled     50m   kubelet            Successfully pulled image "nikhilprao/flaskapp:v2" in 19.413177593s (19.413310176s including waiting)
+  Normal  Created    50m   kubelet            Created container flask-app-container
+  Normal  Started    50m   kubelet            Started container flask-app-container
+nikhilprao@Nikhils-MacBook-Air flaskwork % 
