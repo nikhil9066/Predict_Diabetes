@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
 </head>
+
 <body>
     <h1>An error occurred</h1>
     <p>{{ error_message }}</p>
+
+    {% if traceback %}
+        <h2>Traceback</h2>
+        <pre>{{ traceback }}</pre>
+    {% endif %}
 </body>
+
 </html>

@@ -28,12 +28,12 @@ def df():
 
     merge_df_all = pd.merge(merge_df_do, de_new_f, on='FIPS', how='inner')
     merge_df_all.drop(columns=["YEAR", "COUNTY", "STATE"], inplace=True)
-
-    return merge_df_all
+    print(type(merge_df_all))
+    # print(type(merge_df_all.tolist()))
+    return merge_df_all, merge_df_all.columns.tolist()
 
 def getinfo():
-    merge_df_all = df()
-    columns = merge_df_all.columns.tolist()
+    merge_df_all, columns = df() 
     matplotlib.use('agg')
     plt.ioff()
 
@@ -126,6 +126,6 @@ def model():
 
 
 # Uncomment the following lines to test the functions
-# df()
+df()
 # getinfo()
 # model()
