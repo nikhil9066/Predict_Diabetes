@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Random 3D Scatter Plot</title>
+  <meta charset="UTF-8">
+  <title>Data Visualization</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .scatter-plot {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Random 3D Scatter Plot</h1>
-    <img src="{{ url_for('static', filename='random_3d_scatter_plot.png') }}" alt="Random 3D Scatter Plot">
+  <h2>Pair Plot</h2>
+  <img src="data:image/png;base64,{{ results.pairplot_img_base64 }}" alt="Pair Plot">
+
+  <h2>Histograms</h2>
+  <img src="data:image/png;base64,{{ results.hist_plots_img_base64 }}" alt="Histograms">
+
+  <h2>Summary Statistics</h2>
+  {{ results.summary_stats | safe }}
+
+ <h2>Skewness Table</h2>
+<div>
+  {{ results.skewness_table_img_base64 | safe }}
+</div>
+
+  <h2>Correlation Matrix Table</h2>
+  <div>
+    {{ results.correlation_matrix_table | safe }}
+  </div>
+
+  <h2>Correlation Matrix Heatmap</h2>
+  <img src="data:image/png;base64,{{ results.corr_matrix_heatmap_img_base64 }}" alt="Correlation Matrix Heatmap">
+
+  <h2>3D Scatter Plot</h2>
+  <div class="scatter-plot" id="scatter-plot"></div>
+
+<script>
+    // Add interactivity using Plotly for the 3D Scatter Plot
+    var trace1 = {
+        x: {{ results.scatter_plot_data.x }},
+        y: {{ results.scatter_plot_data.y }},
+        z: {{ results.scatter_plot_data.z }},
+        mode: 'markers',
+        marker: {
+            size: 12,
+            line: {
+                color: 'rgba(217, 217, 217, 0.14)',
+                width: 0.5
+            },
+            opacity: 0.8
+        },
+        type: 'scatter3d'
+    };
+
+    var layout = {
+        margin: {
+            l: 0,
+            r: 0,
+            b: 0,
+            t: 0
+        }
+    };
+
+    Plotly.newPlot('scatter-plot', [trace1], layout);
+</script>
+
+
 </body>
+
 </html>
