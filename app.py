@@ -13,9 +13,9 @@ def home():
 @app.route('/pdf')
 def display_random_data():
     try:
-        # Newdataframes = df()
-        # random_sample = Newdataframes.sample(n=30, random_state=random.seed())
-        Newdataframes = df()
+        Newdataframes,_ = df()
+        print("-------------------------")
+        print(type(Newdataframes))
         random_sample = Newdataframes.sample(n=30, random_state=random.seed())
         random_data = random_sample.values.tolist()
         column_names = random_sample.columns.tolist()
