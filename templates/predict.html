@@ -1,0 +1,134 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Predict Page</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 3px #999;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #pie-chart {
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Predict Page</h2>
+
+  <form id="predict-form">
+    <label for="obese">Enter % OBESE:</label>
+    <input type="number" id="obese" name="obese" placeholder="Enter % OBESE" required>
+
+    <label for="inactive">Enter % INACTIVE:</label>
+    <input type="number" id="inactive" name="inactive" placeholder="Enter % INACTIVE" required>
+
+    <button type="button" onclick="predict()">Predict</button>
+  </form>
+
+  <h2>Predicted % DIABETIC: <span id="predicted-diabetic"></span></h2>
+
+  <h2>Pie Chart</h2>
+  <div id="pie-chart"></div>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    function predict() {
+      var obese = parseFloat(document.getElementById('obese').value);
+      var inactive = parseFloat(document.getElementById('inactive').value);
+
+      // Perform prediction using JavaScript or send the data to the server for prediction
+      // For simplicity, we'll use a placeholder value here
+      var predictedDiabetic = (obese + inactive) / 2;
+
+      document.getElementById('predicted-diabetic').innerText = predictedDiabetic.toFixed(2) + "%";
+
+      // Update the Pie Chart
+      var pieData = [{
+        labels: ['Predicted % DIABETIC', 'Remaining %'],
+        values: [predictedDiabetic, 100 - predictedDiabetic],
+        type: 'pie'
+      }];
+
+      Plotly.newPlot('pie-chart', pieData);
+    }
+  </script>
+
+</body>
+
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Predict</title>
+</head>
+
+<body>
+    <h1>Predict % DIABETIC</h1>
+
+    <form method="post" action="/predict">
+        <label for="obese">Enter % OBESE:</label>
+        <input type="text" id="obese" name="obese" required>
+
+        <label for="inactive">Enter % INACTIVE:</label>
+        <input type="text" id="inactive" name="inactive" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- Display the predicted result -->
+    <div id="result">
+        {% if predicted_diabetic %}
+            <p>Predicted % DIABETIC: {{ predicted_diabetic }}%</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
