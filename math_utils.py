@@ -1,12 +1,21 @@
-import pandas as pd
-import seaborn as sns
+# math_utils.py
 import matplotlib
 import matplotlib.pyplot as plt
-import io
 import plotly.express as px
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import io
 import base64
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from mpl_toolkits.mplot3d import Axes3D
+from plotly.subplots import make_subplots
+import plotly.graph_objs as go
+
+# Placeholder for the trained model
+trained_model = None
 
 def df():
     excel = pd.ExcelFile("cdc.xlsx")
@@ -28,12 +37,12 @@ def df():
 
     merge_df_all = pd.merge(merge_df_do, de_new_f, on='FIPS', how='inner')
     merge_df_all.drop(columns=["YEAR", "COUNTY", "STATE"], inplace=True)
-    print(type(merge_df_all))
-    # print(type(merge_df_all.tolist()))
     return merge_df_all, merge_df_all.columns.tolist()
 
-def getinfo():
-    merge_df_all, columns = df() 
+# math_utils.py
+
+def getinfo(merge_df_all):
+    columns = merge_df_all.columns.tolist()
     matplotlib.use('agg')
     plt.ioff()
 
@@ -61,12 +70,12 @@ def getinfo():
     # Skewness
     skewness_table_img = io.BytesIO()
     skewness = merge_df_all.iloc[:, -3:].skew()
-    skewness_df = skewness.to_frame().reset_index() 
+    skewness_df = skewness.to_frame().reset_index()     
 
     # Convert skewness table to HTML and write to BytesIO
     skewness_table_img.write(skewness_df.to_html(index=False, justify='center', classes='table table-bordered table-condensed table-striped').encode('utf-8'))
     skewness_table_img.seek(0)
-    skewness_table_img_base64 = base64.b64encode(skewness_table_img.read()).decode('utf-8') 
+    skewness_table_html = skewness_table_img.read().decode('utf-8')  # Convert BytesIO to string
 
     # Correlation Matrix
     correlation_matrix_table_img = io.BytesIO()
@@ -89,13 +98,36 @@ def getinfo():
     return {
         'pairplot_img_base64': pairplot_img_base64,
         'hist_plots_img_base64': hist_plots_img_base64,
-        'skewness_table_img_base64': skewness_table_img_base64,
+        'skewness_table_html': skewness_table_html,
         'corr_matrix_heatmap_img_base64': corr_matrix_heatmap_img_base64,
         'data_table': skewness_df.to_html(index=False, justify='center', classes='table table-bordered table-condensed table-striped'),
         'correlation_matrix_table': correlation_matrix.to_html(index=True, justify='center', classes='table table-bordered table-condensed table-striped'),
         'summary_stats': merge_df_all.describe().to_html(classes='table table-bordered table-condensed table-striped')
     }
 
+# def model():
+#     merge_df_all, columns = df()
+
+#     X = merge_df_all[['% OBESE', '% INACTIVE']]
+#     y = merge_df_all[['% DIABETIC']]    
+
+#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)   
+
+#     model = LinearRegression()
+#     model.fit(X_train, y_train)  
+
+#     y_predict = model.predict(X_test)  
+
+#     scatter_plot_data = {
+#         'x': X_test['% OBESE'].tolist(),
+#         'y': X_test['% INACTIVE'].tolist(),
+#         'z': y_test['% DIABETIC'].tolist(),
+#     }
+
+#     return {
+#         'scatter_plot_data': scatter_plot_data,
+#         'model': model,  # Include the trained model in the result
+#     }
 def model():
     merge_df_all, columns = df()
 
@@ -109,23 +141,78 @@ def model():
 
     y_predict = model.predict(X_test)  
 
-    # 3D Scatter Plot using Plotly
     scatter_plot_data = {
-        'x': merge_df_all['% OBESE'],
-        'y': merge_df_all['% INACTIVE'],
-        'z': merge_df_all['% DIABETIC'],
+        'x': X_test['% OBESE'].tolist(),
+        'y': X_test['% INACTIVE'].tolist(),
+        'z': y_test['% DIABETIC'].tolist(),
     }
 
-    # Save the plot to in-memory storage
-    model_plot_img_base64 = base64.b64encode(px.scatter_3d(merge_df_all, x='% OBESE', y='% INACTIVE', z='% DIABETIC').to_image(format="png")).decode('utf-8')
-
     return {
-        'model_plot_img_base64': model_plot_img_base64,
+        'model': model,
         'scatter_plot_data': scatter_plot_data,
     }
 
 
+# math_utils.py
+# ... (previous code)
+
+def plot_scatter_3d(model, merge_df_all, z_data):
+    X_test = merge_df_all[['% OBESE', '% INACTIVE']]
+    
+    # Predict the values using the trained model
+    y_predict = model.predict(X_test)
+
+    # Create 3D scatter plot
+    trace_actual = go.Scatter3d(
+        x=X_test['% OBESE'],
+        y=X_test['% INACTIVE'],
+        z=z_data,
+        mode='markers',
+        marker=dict(size=5, color='blue'),
+        name='Actual Data'
+    )
+
+    trace_predict = go.Scatter3d(
+        x=X_test['% OBESE'],
+        y=X_test['% INACTIVE'],
+        z=y_predict,
+        mode='markers',
+        marker=dict(size=5, color='red'),
+        name='Predicted Values'
+    )
+
+    fig = make_subplots(rows=1, cols=1, specs=[[{'type': 'scatter3d'}]])
+    fig.add_trace(trace_actual)
+    fig.add_trace(trace_predict)
+
+    fig.update_layout(
+        scene=dict(
+            xaxis=dict(title='% OBESE'),
+            yaxis=dict(title='% INACTIVE'),
+            zaxis=dict(title='% DIABETIC'),
+        ),
+        title='Scatter Plot with Multilinear Regression',
+        showlegend=True,
+    )
+
+    # Convert the plot to base64 string
+    model_plot_img_base64 = fig.to_image(format='png')
+    model_plot_img_base64 = base64.b64encode(model_plot_img_base64).decode('utf-8')
+
+    return model_plot_img_base64
+
+def predict(obese, inactive):
+    global trained_model
+
+    if trained_model is None:
+        # Handle the case when the model is not trained
+        raise ValueError("Model not trained. Please train the model first.")
+
+    # Perform prediction using the trained model
+    predicted_diabetic = trained_model.predict([[obese, inactive]])[0]
+
+    return predicted_diabetic
 # Uncomment the following lines to test the functions
-df()
+# df()
 # getinfo()
 # model()
