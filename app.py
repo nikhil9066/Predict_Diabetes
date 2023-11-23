@@ -44,6 +44,7 @@ def predict():
             inactive = float(request.form['inactive'])
 
             # Placeholder: Perform prediction using the loaded model
+            # This is wrong need to change the logic
             predicted_diabetic = 0.0  # Replace with actual prediction logic
 
             # Render the result on the predict.html page
