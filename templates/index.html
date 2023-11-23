@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Data Visualization</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -15,6 +16,8 @@
     }
 
     img {
+      display: block;
+      margin: 0 auto;
       max-width: 100%;
       height: auto;
       border: 1px solid #ddd;
@@ -27,7 +30,8 @@
       margin-bottom: 20px;
     }
 
-    th, td {
+    th,
+    td {
       border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
@@ -39,7 +43,12 @@
 
     .scatter-plot {
       width: 100%;
-      height: 400px;
+      height: 500px;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 20px;
     }
 
     .btn {
@@ -60,43 +69,108 @@
     .btn:hover {
       background-color: #0056b3;
     }
+
+    /* Navbar styles */
+    nav {
+      background-color: #007BFF;
+    }
+
+    .navbar-brand,
+    .navbar-nav a {
+      color: #fff !important;
+    }
   </style>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
-  <h2>Pair Plot</h2>
-  <img src="data:image/png;base64,{{ results.pairplot_img_base64 }}" alt="Pair Plot">
-
-  <h2>Histograms</h2>
-  <img src="data:image/png;base64,{{ results.hist_plots_img_base64 }}" alt="Histograms">
-
-  <h2>Summary Statistics</h2>
-  {{ results.summary_stats | safe }}
-
-  <h2>Skewness Table</h2>
-  <div>
-    {{ results.skewness_table_html | safe }}
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">Data Visualization</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#pair-plot">Pair Plot</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#histograms">Histograms</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#summary-stats">Summary Statistics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#skewness-table">Skewness Table</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#corr-matrix-table">Correlation Matrix Table</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#corr-matrix-heatmap">Correlation Matrix Heatmap</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#scatter-plot">3D Scatter Plot</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="mb-4"></div>
+  <div id="pair-plot">
+    <h2>Pair Plot</h2>
+    <img src="data:image/png;base64,{{ results.pairplot_img_base64 }}" alt="Pair Plot">
   </div>
 
-  <h2>Correlation Matrix Table</h2>
-  <div>
-    {{ results.correlation_matrix_table | safe }}
+  <div id="histograms">
+    <h2>Histograms</h2>
+    <img src="data:image/png;base64,{{ results.hist_plots_img_base64 }}" alt="Histograms">
   </div>
 
-  <h2>Correlation Matrix Heatmap</h2>
-  <img src="data:image/png;base64,{{ results.corr_matrix_heatmap_img_base64 }}" alt="Correlation Matrix Heatmap">
+  <div id="summary-stats">
+    <h2>Summary Statistics</h2>
+    {{ results.summary_stats | safe }}
+  </div>
 
-<h2>3D Scatter Plot</h2>
-<div class="scatter-plot" id="scatter-plot"></div>
+  <div id="skewness-table">
+    <h2>Skewness Table</h2>
+    <div>
+      {{ results.skewness_table_html | safe }}
+    </div>
+  </div>
 
-  <a class="btn" href="/predict">Go to Predict Page</a>
+  <div id="corr-matrix-table">
+    <h2>Correlation Matrix Table</h2>
+    <div>
+      {{ results.correlation_matrix_table | safe }}
+    </div>
+  </div>
 
-  <script>
+  <div id="corr-matrix-heatmap">
+    <h2>Correlation Matrix Heatmap</h2>
+    <img src="data:image/png;base64,{{ results.corr_matrix_heatmap_img_base64 }}" alt="Correlation Matrix Heatmap">
+  </div>
+
+  <h2>3D Scatter Plot</h2>
+  <div class="scatter-plot" id="scatter-plot"></div>
+
+<!--   <div id="scatter-plot">
+    <h2>3D Scatter Plot</h2>
+    <div class="scatter-plot" id="scatter-plot"></div>
+  </div> -->
+
+  <div class="btn-container">
+    <a class="btn" href="/predict">Go to Predict Page</a>
+  </div>
+
+<script>
   // Add interactivity using Plotly for the 3D Scatter Plot
+  var scatterData = {{ results.scatter_plot_data | tojson | safe }};
+  
   var trace1 = {
-    x: {{ results.scatter_plot_data.x }},
-    y: {{ results.scatter_plot_data.y }},
-    z: {{ results.scatter_plot_data.z }},
+    x: scatterData.x,
+    y: scatterData.y,
+    z: scatterData.z,
     mode: 'markers',
     marker: {
       size: 12,
@@ -106,7 +180,9 @@
       },
       opacity: 0.8
     },
-    type: 'scatter3d'
+    type: 'scatter3d',
+    hoverinfo: 'text',  // Show hover text
+    text: scatterData.text  // Use the hover text directly from scatterData
   };
 
   var layout = {
