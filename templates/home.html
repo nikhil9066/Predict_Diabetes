@@ -15,31 +15,86 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden; /* Hide overflow to prevent scrollbar */
     }
 
     h1 {
       font-size: 36px;
+      margin-bottom: 20px; /* Add some space below the heading */
     }
 
     button {
       font-size: 24px;
       padding: 10px 20px;
-      margin-top: 20px;
-      background-color: #007bff;
-      color: white;
+      background-color: white;
+      color: black; /* Invert the words */
       border: none;
       cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+      border-radius: 20px; /* Make the button curvy */
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #007bff;
+      color: white;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+
+    /* Rain effect styling */
+    .rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* Allow clicks to pass through raindrops */
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="rain"></div>
   <h1>Data Science Project MTH adv Stats</h1>
   <a href="{{ url_for('display_random_data') }}"><button>Data Set</button></a>
+
+ <script>
+    // Generate more raindrops dynamically with binary (0s and 1s) and slower fall
+    document.addEventListener('DOMContentLoaded', function () {
+      const rainContainer = document.querySelector('.rain');
+      for (let i = 0; i < 100; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'drop';
+        drop.style.left = `${Math.random() * 100}vw`;
+        drop.style.animationDuration = `${Math.random() * 4 + 2}s`; /* Vary animation duration (slower) */
+        drop.innerText = Math.random() < 0.5 ? '0' : '1';
+        rainContainer.appendChild(drop);
+      }
+    });
+  </script>
 </body>
 
 </html>

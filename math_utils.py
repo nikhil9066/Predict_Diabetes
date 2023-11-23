@@ -39,8 +39,6 @@ def df():
     merge_df_all.drop(columns=["YEAR", "COUNTY", "STATE"], inplace=True)
     return merge_df_all, merge_df_all.columns.tolist()
 
-# math_utils.py
-
 def getinfo(merge_df_all):
     columns = merge_df_all.columns.tolist()
     matplotlib.use('agg')
@@ -105,29 +103,7 @@ def getinfo(merge_df_all):
         'summary_stats': merge_df_all.describe().to_html(classes='table table-bordered table-condensed table-striped')
     }
 
-# def model():
-#     merge_df_all, columns = df()
 
-#     X = merge_df_all[['% OBESE', '% INACTIVE']]
-#     y = merge_df_all[['% DIABETIC']]    
-
-#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)   
-
-#     model = LinearRegression()
-#     model.fit(X_train, y_train)  
-
-#     y_predict = model.predict(X_test)  
-
-#     scatter_plot_data = {
-#         'x': X_test['% OBESE'].tolist(),
-#         'y': X_test['% INACTIVE'].tolist(),
-#         'z': y_test['% DIABETIC'].tolist(),
-#     }
-
-#     return {
-#         'scatter_plot_data': scatter_plot_data,
-#         'model': model,  # Include the trained model in the result
-#     }
 def model():
     merge_df_all, columns = df()
 
@@ -152,9 +128,6 @@ def model():
         'scatter_plot_data': scatter_plot_data,
     }
 
-
-# math_utils.py
-# ... (previous code)
 
 def plot_scatter_3d(model, merge_df_all, z_data):
     X_test = merge_df_all[['% OBESE', '% INACTIVE']]

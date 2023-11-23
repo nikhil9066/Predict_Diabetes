@@ -1,14 +1,84 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dataframe Display</title>
     <style>
         /* CSS for centering the table horizontally */
         table {
-            margin: 0 auto;
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
         }
+
+        th, td {
+            border: 3px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        td {
+            background-color: white;
+            color: black;
+        }
+
+        /* Center the buttons */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style for the buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 3px #999;
+            margin-right: 10px;
+        }
+
+        .btn-info {
+            background-color: #007BFF;
+        }
+
+        .btn-info:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-predict {
+            background-color: #28a745;
+        }
+
+        .btn-predict:hover {
+            background-color: #218838;
+        }
+
+        body {
+            background-color: #7a7a7a; /* Light gray background */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 10px; /* Added margin */
+        }
+
     </style>
 </head>
+
 <body>
     <h1 style="text-align: center;">Dataframe Display</h1>
     <table border="1">
@@ -26,9 +96,11 @@
         {% endfor %}
     </table>
 
-    <!-- Add a button to redirect to /getinfo -->
-    <form action="/getinfo">
-        <input type="submit" value="Go to Get Info Page">
-    </form>
+    <!-- Add buttons to redirect to /getinfo and /predict -->
+    <div class="button-container">
+        <a class="btn btn-info" href="/getinfo">Info Page</a>
+        <a class="btn btn-predict" href="/predict">Predict Page</a>
+    </div>
 </body>
+
 </html>
