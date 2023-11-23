@@ -13,7 +13,7 @@ def home():
 def display_random_data():
     try:
         merge_df_all, columns = df()
-        random_sample = merge_df_all.sample(n=30, random_state=random.seed())
+        random_sample = merge_df_all.sample(n=20, random_state=random.seed())
         random_data = random_sample.values.tolist()
         column_names = random_sample.columns.tolist()
         return render_template('dataframe.html', data=random_data, headers=column_names)
