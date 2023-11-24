@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,6 +8,11 @@
     body {
       font-family: 'Arial', sans-serif;
       margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
     h2 {
@@ -16,6 +21,7 @@
 
     form {
       margin-bottom: 20px;
+      text-align: center;
     }
 
     label {
@@ -28,6 +34,13 @@
       padding: 8px;
       margin-bottom: 16px;
       box-sizing: border-box;
+    }
+
+    .example {
+      font-size: 14px;
+      color: #666;
+      margin-top: -10px;
+      margin-bottom: 20px;
     }
 
     button {
@@ -50,8 +63,8 @@
     }
 
     #pie-chart {
-      width: 400px;
-      height: 400px;
+      width: 500px;
+      height: 500px;
     }
   </style>
 </head>
@@ -62,9 +75,11 @@
   <form id="predict-form">
     <label for="obese">Enter % OBESE:</label>
     <input type="number" id="obese" name="obese" placeholder="Enter % OBESE" required>
+    <p class="example">Example: 35</p>
 
     <label for="inactive">Enter % INACTIVE:</label>
     <input type="number" id="inactive" name="inactive" placeholder="Enter % INACTIVE" required>
+    <p class="example">Example: 26</p>
 
     <button type="button" onclick="predict()">Predict</button>
   </form>
@@ -86,49 +101,23 @@
 
       document.getElementById('predicted-diabetic').innerText = predictedDiabetic.toFixed(2) + "%";
 
-      // Update the Pie Chart
+      // Update the Pie Chart with animation
       var pieData = [{
         labels: ['Predicted % DIABETIC', 'Remaining %'],
         values: [predictedDiabetic, 100 - predictedDiabetic],
         type: 'pie'
       }];
 
-      Plotly.newPlot('pie-chart', pieData);
+      var layout = {
+        width: 500,
+        height: 500,
+        transition: { duration: 800, easing: 'cubic-in-out' },
+      };
+
+      Plotly.newPlot('pie-chart', pieData, layout);
     }
   </script>
 
-</body>
-
-</html>
- -->
-
- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Predict</title>
-</head>
-
-<body>
-    <h1>Predict % DIABETIC</h1>
-
-    <form method="post" action="/predict">
-        <label for="obese">Enter % OBESE:</label>
-        <input type="text" id="obese" name="obese" required>
-
-        <label for="inactive">Enter % INACTIVE:</label>
-        <input type="text" id="inactive" name="inactive" required>
-
-        <button type="submit">Predict</button>
-    </form>
-
-    <!-- Display the predicted result -->
-    <div id="result">
-        {% if predicted_diabetic %}
-            <p>Predicted % DIABETIC: {{ predicted_diabetic }}%</p>
-        {% endif %}
-    </div>
 </body>
 
 </html>

@@ -34,18 +34,20 @@ def index():
     except Exception as e:
         return render_template('error.html', error_message=str(e)) 
 
+# Load the model during the startup
+trained_model_results = model()
+trained_model = trained_model_results['model']
 
 @app.route('/predict', methods=['GET', 'POST'])
-def predict():
+def predict_route():
     if request.method == 'POST':
         try:
             # Get user inputs from the form
             obese = float(request.form['obese'])
             inactive = float(request.form['inactive'])
 
-            # Placeholder: Perform prediction using the loaded model
-            # This is wrong need to change the logic
-            predicted_diabetic = 0.0  # Replace with actual prediction logic
+            # Perform prediction using the loaded model
+            predicted_diabetic = predict(trained_model, obese, inactive)
 
             # Render the result on the predict.html page
             return render_template('predict.html', predicted_diabetic=predicted_diabetic)
