@@ -2,121 +2,161 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Predict Page</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4; /* Light gray background */
+        }
 
-    h2 {
-      color: #333;
-    }
+        h2 {
+            color: #007BFF; /* Blue color for headings */
+        }
 
-    form {
-      margin-bottom: 20px;
-      text-align: center;
-    }
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+            border: 2px solid #007BFF; /* Blue border for the form */
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333; /* Dark text color for labels */
+        }
 
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-    }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
 
-    .example {
-      font-size: 14px;
-      color: #666;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
+        .example {
+            font-size: 14px;
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
 
-    button {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      outline: none;
-      color: #fff;
-      background-color: #007BFF;
-      border: none;
-      border-radius: 5px;
-      box-shadow: 0 3px #999;
-    }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 3px #0056b3; /* Slightly darker shadow on hover */
+        }
 
-    button:hover {
-      background-color: #0056b3;
-    }
+        button:hover {
+            background-color: #0056b3;
+        }
 
-    #pie-chart {
-      width: 500px;
-      height: 500px;
-    }
-  </style>
+        #pie-chart {
+            width: 500px;
+            height: 500px;
+            margin-top: 20px;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-  <h2>Predict Page</h2>
+    <h2>Predict Page</h2>
 
-  <form id="predict-form">
-    <label for="obese">Enter % OBESE:</label>
-    <input type="number" id="obese" name="obese" placeholder="Enter % OBESE" required>
-    <p class="example">Example: 35</p>
+    <form id="predict-form" method="post" action="/predict">
+        <label for="obese">Enter % OBESE:</label>
+        <input type="number" id="obese" name="obese" placeholder="Enter % OBESE" value="12" required>
+        <p class="example">Example: 12</p>
 
-    <label for="inactive">Enter % INACTIVE:</label>
-    <input type="number" id="inactive" name="inactive" placeholder="Enter % INACTIVE" required>
-    <p class="example">Example: 26</p>
+        <label for="inactive">Enter % INACTIVE:</label>
+        <input type="number" id="inactive" name="inactive" placeholder="Enter % INACTIVE" value="34" required>
+        <p class="example">Example: 34</p>
 
-    <button type="button" onclick="predict()">Predict</button>
-  </form>
+        <button type="submit">Predict</button>
+    </form>
 
-  <h2>Predicted % DIABETIC: <span id="predicted-diabetic"></span></h2>
+    <div id="result">
+        {% if predicted_diabetic %}
+            <p>Predicted % DIABETIC: {{ predicted_diabetic[0] }}%</p>
+        {% endif %}
+    </div>
 
-  <h2>Pie Chart</h2>
-  <div id="pie-chart"></div>
+    <h2>Pie Chart</h2>
+    <div id="pie-chart"></div>
 
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!--     <script>
+        function predict() {
+            var obese = parseFloat(document.getElementById('obese').value);
+            var inactive = parseFloat(document.getElementById('inactive').value);
+
+            // Perform prediction using JavaScript or send the data to the server for prediction
+            // For simplicity, we'll use a placeholder value here
+            var predictedDiabetic = [obese + inactive];
+
+            // Display the predicted result
+            document.getElementById('result').innerHTML = '<p>Predicted % DIABETIC: ' + predictedDiabetic[0].toFixed(2) + '%</p>';
+
+            // Update the Pie Chart with animation
+            var pieData = [{
+                labels: ['Predicted % DIABETIC', 'Remaining %'],
+                values: [predictedDiabetic[0], 100 - predictedDiabetic[0]],
+                type: 'pie'
+            }];
+
+            var layout = {
+                width: 500,
+                height: 500,
+                transition: { duration: 800, easing: 'cubic-in-out' },
+            };
+
+            Plotly.newPlot('pie-chart', pieData, layout);
+        }
+    </script> -->
+<script>
     function predict() {
-      var obese = parseFloat(document.getElementById('obese').value);
-      var inactive = parseFloat(document.getElementById('inactive').value);
+        var obese = parseFloat(document.getElementById('obese').value);
+        var inactive = parseFloat(document.getElementById('inactive').value);
 
-      // Perform prediction using JavaScript or send the data to the server for prediction
-      // For simplicity, we'll use a placeholder value here
-      var predictedDiabetic = (obese + inactive) / 2;
+        // Perform prediction using JavaScript or send the data to the server for prediction
+        // For simplicity, we'll use a placeholder value here
+        var predictedDiabetic = [obese + inactive];
 
-      document.getElementById('predicted-diabetic').innerText = predictedDiabetic.toFixed(2) + "%";
+        // Display the predicted result
+        document.getElementById('result').innerHTML = '<p>Predicted % DIABETIC: ' + predictedDiabetic[0].toFixed(2) + '%</p>';
 
-      // Update the Pie Chart with animation
-      var pieData = [{
-        labels: ['Predicted % DIABETIC', 'Remaining %'],
-        values: [predictedDiabetic, 100 - predictedDiabetic],
-        type: 'pie'
-      }];
+        // Update the Pie Chart with animation
+        var pieData = [{
+            labels: ['Predicted % DIABETIC', 'Remaining %'],
+            values: [predictedDiabetic[0], 100 - predictedDiabetic[0]],
+            type: 'pie'
+        }];
 
-      var layout = {
-        width: 500,
-        height: 500,
-        transition: { duration: 800, easing: 'cubic-in-out' },
-      };
-
-      Plotly.newPlot('pie-chart', pieData, layout);
+        Plotly.newPlot('pie-chart', pieData);
     }
-  </script>
+</script>
 
 </body>
 

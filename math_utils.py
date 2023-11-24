@@ -174,17 +174,38 @@ def plot_scatter_3d(model, merge_df_all, z_data):
 
     return model_plot_img_base64
 
-def predict(obese, inactive):
-    global trained_model
+# def predict(obese, inactive):
+#     global trained_model
 
-    if trained_model is None:
-        # Handle the case when the model is not trained
-        raise ValueError("Model not trained. Please train the model first.")
+#     if trained_model is None:
+#         # Handle the case when the model is not trained
+#         raise ValueError("Model not trained. Please train the model first.")
 
-    # Perform prediction using the trained model
-    predicted_diabetic = trained_model.predict([[obese, inactive]])[0]
+#     # Perform prediction using the trained model
+#     predicted_diabetic = trained_model.predict([[obese, inactive]])[0]
+
+#     return predicted_diabetic
+
+def predict(model, obese, inactive):
+    # Placeholder for prediction logic
+    # You should use the provided model to make predictions based on the input features
+    # Replace the following line with the actual prediction code
+    predicted_diabetic = model.predict([[obese, inactive]])[0]
 
     return predicted_diabetic
+
+
+# # Load the model during the startup
+# trained_model_results = model()
+# trained_model = trained_model_results['model']
+
+# # Print the predicted value for the initial values (12, 34)
+# initial_obese = 12
+# initial_inactive = 34
+# predicted_diabetic_initial = predict_diabetic(trained_model, initial_obese, initial_inactive)
+# print(f"Predicted diabetic value for (12, 34): {predicted_diabetic_initial}")
+
+
 # Uncomment the following lines to test the functions
 # df()
 # getinfo()
