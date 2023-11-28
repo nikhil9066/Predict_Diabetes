@@ -34,7 +34,7 @@ def index():
     except Exception as e:
         return render_template('error.html', error_message=str(e)) 
     
-#     return render_template('predict.html')
+#    return render_template('index.html', results=your_results_data)
 
 # Load the model during the startup
 trained_model_results = model()
