@@ -1,25 +1,6 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Error</title>
-</head>
-
-<body>
-    <h1>An error occurred</h1>
-    <p>{{ error_message }}</p>
-
-    {% if traceback %}
-        <h2>Traceback</h2>
-        <pre>{{ traceback }}</pre>
-    {% endif %}
-</body>
-
-</html>
- -->
- <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,23 +16,28 @@
             height: 100vh;
             margin: 0;
         }
+
         h1 {
             font-size: 64px;
             margin-bottom: 16px;
         }
+
         p {
             font-size: 24px;
             margin-bottom: 16px;
         }
+
         a {
             color: #00ffff;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <div>
         <h1>404 Error</h1>
@@ -60,11 +46,13 @@
     </div>
     <div>
         <h1>An error occurred</h1>
-    <p>{{ error_message }}</p>
+        <p>{{ error_message }}</p>
 
-    {% if traceback %}
+        {% if traceback %}
         <h2>Traceback</h2>
         <pre>{{ traceback }}</pre>
-    {% endif %}</div>
+        {% endif %}
+    </div>
 </body>
+
 </html>
