@@ -33,31 +33,7 @@ def index():
         return render_template('index.html', results=combined_results)
     except Exception as e:
         return render_template('error.html', error_message=str(e)) 
-
-# # Load the model during the startup
-# trained_model_results = model()
-# trained_model = trained_model_results['model']
-
-# @app.route('/predict', methods=['GET', 'POST'])
-# def predict_route():
-#     if request.method == 'POST':
-#         try:
-#             # Get user inputs from the form
-#             obese = float(request.form['obese'])
-#             inactive = float(request.form['inactive'])
-
-#             print(obese)
-#             print(inactive)
-#             # Perform prediction using the loaded model
-#             predicted_diabetic = predict_diabetic(trained_model, obese, inactive)
-#             print("-------------------------------")
-#             print(predicted_diabetic)
-#             # Render the result on the predict.html page
-#             return render_template('predict.html', predicted_diabetic=predicted_diabetic)
-#         except Exception as e:
-#             return render_template('error.html', error_message=str(e))
-
-#     # Render the initial form on GET request
+    
 #     return render_template('predict.html')
 
 # Load the model during the startup
@@ -74,8 +50,8 @@ def predict_route():
 
             # Perform prediction using the loaded model
             predicted_diabetic = predict(trained_model, obese, inactive)
-            print("-------------------------------")
-            print(predicted_diabetic)
+            # print("-------------------------------")
+            # print(predicted_diabetic)
 
             # Render the result on the predict.html page
             return render_template('predict.html', predicted_diabetic=predicted_diabetic)
@@ -84,7 +60,6 @@ def predict_route():
 
     # Render the initial form on GET request
     return render_template('predict.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
