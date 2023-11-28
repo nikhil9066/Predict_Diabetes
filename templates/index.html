@@ -163,13 +163,46 @@
     <a class="btn" href="/predict">Go to Predict Page</a>
   </div>
 
-  <script>
+  <!-- <script>
     // Add interactivity using Plotly for the 3D Scatter Plot
     var scatterData = {
       {
         results.scatter_plot_data | tojson | safe
       }
     };
+
+    var trace1 = {
+      x: scatterData.x,
+      y: scatterData.y,
+      z: scatterData.z,
+      mode: 'markers',
+      marker: {
+        size: 12,
+        line: {
+          color: 'rgba(217, 217, 217, 0.14)',
+          width: 0.5
+        },
+        opacity: 0.8
+      },
+      type: 'scatter3d',
+      hoverinfo: 'text', // Show hover text
+      text: scatterData.text // Use the hover text directly from scatterData
+    };
+
+    var layout = {
+      margin: {
+        l: 0,
+        r: 0,
+        b: 30,
+        t: 0
+      }
+    };
+
+    Plotly.newPlot('scatter-plot', [trace1], layout);
+  </script> -->
+  <script>
+    // Add interactivity using Plotly for the 3D Scatter Plot
+    var scatterData = JSON.parse('{{ results.scatter_plot_data | tojson | safe | replace("'", "\\'") }}');
 
     var trace1 = {
       x: scatterData.x,
