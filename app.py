@@ -61,5 +61,8 @@ def predict_route():
     # Render the initial form on GET request
     return render_template('predict.html')
 
+# if __name__ == '__main__':
+#     app.run(debug=True, port=8080)
+
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, host='0.0.0.0', port=8080)
