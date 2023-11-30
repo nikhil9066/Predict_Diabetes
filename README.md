@@ -30,11 +30,11 @@ docker build -t nikhilprao/flaskapp:v6 .
 After building the Docker image, you can run a container from it using the following command:
 
 ```
-docker run -p 8000:8000 nikhilprao/flaskapp:v6
+docker run -p 8080:8080 nikhilprao/flaskapp:v6
 ```
 The Flask application will be accessible at
 ```
-http://localhost:8000
+http://localhost:8080
 ```
 ## Repository
 The Docker image is hosted on Docker Hub at nikhilprao/flaskapp:v6.
