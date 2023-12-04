@@ -8,17 +8,18 @@ This is a basic Flask application containerized using Docker.
 - [Repository](#repository)
 - [Deploying to Kubernetes](#deploying-to-kubernetes)
 - [Kube Status](#kube-status)
-
+- [Important and Handy Commands](#important-and-handy-commands)
 
 ## Getting Started
 
 ### Prerequisites
 
 - Docker installed on your system
+- Kubernetes (for deployment)
 
 ### Building the Docker Image
 
-Inorder to start the flask application pull the docker image from the hub
+In order to start the Flask application pull the docker image from the hub
 ```
 docker pull nikhilprao/flaskapp:v6
 ```
@@ -104,3 +105,54 @@ replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m
 ```
 #### Output when Kube is running:
 <img width="782" alt="Screenshot 2023-11-01 at 5 59 11 PM" src="https://github.com/nikhil9066/flaskwork/assets/36182930/993e5825-118d-4ead-b795-4e238d3c42e7">
+
+### Important and Handy Command
+
+Docker
+
+	Pull - docker pull nikhilprao/flaskapp:v6
+	build - docker build -t nikhilprao/flaskapp:v6 .
+
+	Run - docker run -p 8080:8080 nikhilprao/flaskapp:v6
+	web - http://localhost:8080
+	Hub - https://hub.docker.com/repositories/nikhilprao
+
+Kube
+
+	1. Start by checking the Kubernetes version and cluster information:
+			kubectl version
+			kubectl cluster-info
+
+	2. Get a list of all resources in the cluster:
+			kubectl get all
+
+	3. Check the status of Minikube:
+			minikube status
+
+	4. If Minikube is not running, start it:
+			minikube start
+
+	5. Check the status again:
+			minikube status
+
+	6. Deploy your application using the deployment script:
+			python3 deployment.py
+
+	7. Scale the deployment to 5 replicas (uncomment the line if necessary):
+			# kubectl scale --replicas=5 -f flask-app-deployment.yaml
+
+	8. Get information about the deployment, services, and pods:
+			kubectl get deployment
+			kubectl get services
+			kubectl get pods
+
+	9. Describe the details of the Flask app service:
+			kubectl describe service flask-app-service
+
+	10. Restart the deployment to apply any changes:
+			kubectl rollout restart deployment flask-app-deployment
+
+	11.Clean Up:
+			kubectl delete deployment flask-app-deployment
+		kubectl delete service flask-app-service
+
