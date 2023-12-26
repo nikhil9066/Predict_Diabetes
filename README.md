@@ -1,5 +1,5 @@
-# Flask Application with Docker
-This is a basic Flask application containerized using Docker.
+# Predict Diabetes Web Application
+This is a basic Flask application containerized using Docker and deployed in Kube.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
