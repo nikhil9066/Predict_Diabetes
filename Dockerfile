@@ -11,5 +11,6 @@ RUN pip install --upgrade pip setuptools \
     && pip install scikit-learn -U kaleido \
     && pip install --no-cache-dir -r requirements.txt
 
+# runs on localhoat and port 8080
 EXPOSE 8080
 CMD ["python3", "app.py"]
