@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app-deployment
+  name: Diabetes-app-deployment
 spec:
   replicas: 3  # Adjust the number of replicas as needed
   selector:
