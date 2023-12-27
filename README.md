@@ -19,7 +19,7 @@ This is a basic Flask application containerized using Docker and deployed in Kub
 
 ### Building the Docker Image
 
-In order to start the Flask application pull the docker image from the hub
+To start the Flask application pull the docker image from the hub
 ```
 docker pull nikhilprao/flaskapp:v6
 ```
@@ -106,6 +106,15 @@ replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m
 #### Output when Kube is running:
 <img width="782" alt="Screenshot 2023-11-01 at 5 59 11 PM" src="https://github.com/nikhil9066/flaskwork/assets/36182930/993e5825-118d-4ead-b795-4e238d3c42e7">
 
+### Website running in local host - Pinging 1000 times every second in a loop of 5
+<img width="863" alt="Screenshot 2023-12-27 at 1 13 00 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/b6deeb10-32b2-466b-8b8a-eb1ffedcaffa">
+
+### Website in Kube clustered with 6 replicas - Pinging 1000 times every second in a loop of 5
+<img width="870" alt="Screenshot 2023-12-27 at 3 59 24 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/0a3af8f0-b85d-4c68-a1a4-a6bd1a32eac0">
+
+### Overview of Kube Dashboard
+<img width="1470" alt="Screenshot 2023-12-27 at 4 10 07 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/ae7dd16c-8aa0-44b8-a053-0561c319ea0a">
+
 ### Important and Handy Command
 
 Docker
@@ -138,21 +147,26 @@ Kube
 	6. Deploy your application using the deployment script:
 			python3 deployment.py
 
-	7. Scale the deployment to 5 replicas (uncomment the line if necessary):
-			# kubectl scale --replicas=5 -f flask-app-deployment.yaml
+ 	7. Check the Kube services
+			minikube service flask-app-service
+   
+	8. Scale the deployment to 5 replicas (uncomment the line if necessary):
+			kubectl scale --replicas=5 -f flask-app-deployment.yaml
 
-	8. Get information about the deployment, services, and pods:
+	9. Get information about the deployment, services, and pods:
 			kubectl get deployment
 			kubectl get services
 			kubectl get pods
-
-	9. Describe the details of the Flask app service:
+   
+	10. Kube dashboard to check the pods and replicas:
+			minikube dashboard
+   
+	11. Describe the details of the Flask app service:
 			kubectl describe service flask-app-service
 
-	10. Restart the deployment to apply any changes:
+	12. Restart the deployment to apply any changes:
 			kubectl rollout restart deployment flask-app-deployment
 
-	11.Clean Up:
+	13. Clean Up:
 			kubectl delete deployment flask-app-deployment
-		kubectl delete service flask-app-service
-
+			kubectl delete service flask-app-service
