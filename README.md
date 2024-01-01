@@ -103,6 +103,9 @@ NAME                                              DESIRED   CURRENT   READY   AG
 replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m48s
 
 ```
+#### Output when Kube is running:
+<img width="1409" alt="Screenshot 2024-01-01 at 1 36 36 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/3480a811-aaf4-4f5c-aa9a-4c74e47b1ca6">
+
 ### Website running in local host - Pinging 1000 times every second in a loop of 5
 <img width="863" alt="Screenshot 2023-12-27 at 1 13 00 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/b6deeb10-32b2-466b-8b8a-eb1ffedcaffa">
 
