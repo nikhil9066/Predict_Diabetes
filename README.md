@@ -103,9 +103,6 @@ NAME                                              DESIRED   CURRENT   READY   AG
 replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m48s
 
 ```
-#### Output when Kube is running:
-<img width="782" alt="Screenshot 2023-11-01 at 5 59 11 PM" src="https://github.com/nikhil9066/flaskwork/assets/36182930/993e5825-118d-4ead-b795-4e238d3c42e7">
-
 ### Website running in local host - Pinging 1000 times every second in a loop of 5
 <img width="863" alt="Screenshot 2023-12-27 at 1 13 00 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/b6deeb10-32b2-466b-8b8a-eb1ffedcaffa">
 
@@ -113,7 +110,7 @@ replicaset.apps/flask-app-deployment-5f65686d4b   3         3         3       4m
 <img width="870" alt="Screenshot 2023-12-27 at 3 59 24 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/0a3af8f0-b85d-4c68-a1a4-a6bd1a32eac0">
 
 ### Overview of Kube Dashboard
-<img width="1470" alt="Screenshot 2023-12-27 at 4 10 07 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/ae7dd16c-8aa0-44b8-a053-0561c319ea0a">
+<img width="1470" alt="Screenshot 2023-12-27 at 4 10 07 PM" src="https://github.com/nikhil9066/Predict_Diabetes/assets/36182930/c3a232b9-3c31-453a-b5c5-19df8eaab0e3">
 
 ### Important and Handy Command
 
